@@ -1,0 +1,9 @@
+/* App.css */
+.error {
+    background-color: #ffe6e6;
+    color: #ff3333;
+    border: 1px solid #ff3333;
+    padding: 10px;
+    margin-bottom: 20px;
+  }
+  
