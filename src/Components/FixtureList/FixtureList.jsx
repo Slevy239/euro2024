@@ -33,18 +33,26 @@ const FixtureList = ({ matches }) => {
               <div className="events">
                 {match.events && match.events.length > 0 && (
                   <>
-                    <h3>Goals:</h3>
-                    {match.events
-                      .filter(event => event.type === 'Goal' && event.team.id === match.teams.away.id)
-                      .map((goal, idx) => (
-                        <p key={idx}>{goal.detail} || {goal.player.name} {goal.time.elapsed}'</p>
-                      ))}
-                    <h3>Cards:</h3>
-                    {match.events
-                      .filter(event => event.type === 'Card' && event.team.id === match.teams.away.id)
-                      .map((card, idx) => (
-                        <p key={idx}>{card.detail} || {card.player.name} {card.time.elapsed}'</p>
-                      ))}
+                    <div className="goals">
+                      <h3>Goals:</h3>
+                      {match.events
+                        .filter(event => event.type === 'Goal' && event.team.id === match.teams.away.id)
+                        .map((goal, idx) => (
+                          <p key={idx}>
+                            {goal.detail} || {goal.player.name} {goal.time.elapsed}'
+                          </p>
+                        ))}
+                    </div>
+                    <div className="cards">
+                      <h3>Cards:</h3>
+                      {match.events
+                        .filter(event => event.type === 'Card' && event.team.id === match.teams.away.id)
+                        .map((card, idx) => (
+                          <p key={idx} className={`card ${card.detail.toLowerCase()}`}>
+                            {card.detail} || {card.player.name} {card.time.elapsed}'
+                          </p>
+                        ))}
+                    </div>
                   </>
                 )}
                 {!match.events || match.events.length === 0 && (
@@ -60,18 +68,26 @@ const FixtureList = ({ matches }) => {
               <div className="events">
                 {match.events && match.events.length > 0 && (
                   <>
-                    <h3>Goals:</h3>
-                    {match.events
-                      .filter(event => event.type === 'Goal' && event.team.id === match.teams.home.id)
-                      .map((goal, idx) => (
-                        <p key={idx}>{goal.detail} || {goal.player.name} {goal.time.elapsed}'</p>
-                      ))}
-                    <h3>Cards:</h3>
-                    {match.events
-                      .filter(event => event.type === 'Card' && event.team.id === match.teams.home.id)
-                      .map((card, idx) => (
-                        <p key={idx}>{card.detail} || {card.player.name} {card.time.elapsed}'</p>
-                      ))}
+                    <div className="goals">
+                      <h3>Goals:</h3>
+                      {match.events
+                        .filter(event => event.type === 'Goal' && event.team.id === match.teams.home.id)
+                        .map((goal, idx) => (
+                          <p key={idx}>
+                            {goal.detail} || {goal.player.name} {goal.time.elapsed}'
+                          </p>
+                        ))}
+                    </div>
+                    <div className="cards">
+                      <h3>Cards:</h3>
+                      {match.events
+                        .filter(event => event.type === 'Card' && event.team.id === match.teams.home.id)
+                        .map((card, idx) => (
+                          <p key={idx} className={`card ${card.detail.toLowerCase()}`}>
+                            {card.detail} || {card.player.name} {card.time.elapsed}'
+                          </p>
+                        ))}
+                    </div>
                   </>
                 )}
                 {!match.events || match.events.length === 0 && (

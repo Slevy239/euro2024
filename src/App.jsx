@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import Header from './Components/Header/Header';
+import FixtureList from './Components/FixtureList/FixtureList';
 import Error from './Components/Error/Error';
 import './App.css';
-import FixtureList from './Components/FixtureList/FixtureList';
 
 function App() {
-  const [events, setEvents] = useState([]);
+  const [matches, setMatches] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
     fetch('http://127.0.0.1:5000/fixtures')
@@ -21,9 +22,9 @@ function App() {
         if (data.errors) {
           setError('Out of Requests');
           setLoading(false);
-          return; // Exit early
+          return;
         }
-        setEvents(data); // Assuming 'events' is the key in your JSON response for match events
+        setMatches(data);
         setLoading(false);
       })
       .catch(error => {
@@ -31,6 +32,28 @@ function App() {
         setLoading(false);
       });
   }, []);
+
+  const handleSearchChange = event => {
+    setSearchTerm(event.target.value);
+  };
+
+  const filteredMatches = matches.filter(match => {
+    const lowerCaseSearch = searchTerm.toLowerCase();
+    
+    // Check if team names match search term
+    const teamMatch = match.teams.away.name.toLowerCase().includes(lowerCaseSearch) ||
+      match.teams.home.name.toLowerCase().includes(lowerCaseSearch);
+
+    // Check if there are goals or cards matching search term
+    const eventMatch = match.events.some(event => {
+      return (
+        (event.type === 'Goal' && event.detail.toLowerCase().includes(lowerCaseSearch)) ||
+        (event.type === 'Card' && event.detail.toLowerCase().includes(lowerCaseSearch))
+      );
+    });
+
+    return teamMatch || eventMatch;
+  });
 
   if (loading) {
     return (
@@ -42,7 +65,7 @@ function App() {
       </div>
     );
   }
-  console.log(events)
+
   return (
     <div className="App">
       <Header />
@@ -50,7 +73,18 @@ function App() {
         {error ? (
           <Error message={`Error: ${error}`} />
         ) : (
-          <FixtureList matches={events} />
+          <>
+            <div className="search-container">
+              <input
+                type="text"
+                placeholder="Search by team name, goals, or cards..."
+                value={searchTerm}
+                onChange={handleSearchChange}
+                className="search-input"
+              />
+            </div>
+            <FixtureList matches={filteredMatches} />
+          </>
         )}
       </div>
     </div>

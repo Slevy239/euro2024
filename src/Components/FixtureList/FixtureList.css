@@ -2,85 +2,91 @@
     font-family: Arial, sans-serif;
     max-width: 800px;
     margin: 0 auto;
-    padding: 20px;
-}
-
-.match {
-    border: 1px solid #ccc;
+  }
+  
+  .match {
     margin-bottom: 20px;
     padding: 10px;
-    background-color: #f9f9f9;
-}
-
-.match-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 10px;
-}
-
-.league-info {
-    display: flex;
-    align-items: center;
-}
-
-.league-logo {
-    width: 50px;
-    height: 50px;
-    margin-right: 10px;
-}
-
-.league-flag {
-    width: 30px;
-    height: 20px;
-    margin-left: 10px;
-}
-
-.league-details {
-    margin-left: 10px;
-}
-
-.score {
-    font-size: 1.2rem;
-}
-
-.teams {
+    background-color: #f0f0f0;
+    border-radius: 5px;
+  }
+  
+  .match-header {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 10px;
-}
-
-.team {
-    width: 48%;
-    border: 1px solid #ccc;
-    padding: 10px;
-    background-color: #fff;
-}
-
-.team-header {
+    align-items: center;
+  }
+  
+  .league-info {
     display: flex;
     align-items: center;
-    margin-bottom: 10px;
-}
-
-.team-logo {
+  }
+  
+  .league-logo {
     width: 40px;
     height: 40px;
+    border-radius: 50%;
     margin-right: 10px;
-}
-
-.events {
+  }
+  
+  .league-flag {
+    width: 20px;
+    height: 20px;
+    margin-left: 10px;
+  }
+  
+  .league-details {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .teams {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .team {
+    flex: 1;
+    margin: 10px;
+    padding: 10px;
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .team-header {
+    display: flex;
+    align-items: center;
+  }
+  
+  .team-logo {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+  }
+  
+  .events {
     margin-top: 10px;
-}
-
-.events h3 {
-    font-size: 1.1rem;
-    margin-bottom: 5px;
-}
-
-.events p {
+  }
+  
+  .goals,
+  .cards {
+    margin-top: 10px;
+  }
+  
+  .card {
+    font-weight: bold;
     margin: 5px 0;
-}
+  }
+  
+  .card.yellow-card {
+    color: yellow;
+  }
+  
+  .card.red-card {
+    color: red;
+  }
+  
 
 h2,
 h3,
@@ -88,3 +94,17 @@ p,
 .score {
     color: black;
 }
+
+.card {
+    font-weight: bold;
+    margin: 5px 0;
+  }
+  
+  .card.yellow-card {
+    color: yellow;
+  }
+  
+  .card.red-card {
+    color: red;
+  }
+  
