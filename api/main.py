@@ -24,46 +24,17 @@ def get_fixtures():
     response_dict = json.loads(data)
 
     total = response_dict.get('results', 0)
-
-    if 'errors' in response_dict:
-        return jsonify({'message': 'Out of Requests'})
-    current_euro_matches = 0
-    fixtures_data = []
-    for i in range(total):
-        if response_dict['response'][i]['league']['id'] == 4:
-            current_euro_matches += 1
-
-    if current_euro_matches == 0:
-        return jsonify({'message': 'No Results'})
-    else:
-        for i in range(total):
-            listed, all_info = response_dict['response'][i]['events'], response_dict['response'][i]
-            if all_info['league']['id'] == 4:
-                home, away = all_info['teams']['home']['name'], all_info['teams']['away']['name']
-                home_score, away_score = all_info['goals']['home'], all_info['goals']['away']
-
-                match_data = {
-                    'home_team': home,
-                    'away_team': away,
-                    'home_score': home_score,
-                    'away_score': away_score,
-                    'events': []
-                }
-
-                if home_score + away_score >= 0:
-                    for event in listed:
-                        event_data = {
-                            'time_elapsed': event['time']['elapsed'],
-                            'player_name': event['player']['name'],
-                            'team_name': event['team']['name'],
-                            'event_type': event['type']
-                        }
-                        match_data['events'].append(event_data)
-
-                fixtures_data.append(match_data)
-
-    return jsonify(fixtures_data)
-
+    world_matches = []
+    for i in range(len(response_dict['response'])):
+        match_data = {
+            'league': response_dict['response'][i]['league'],
+            'teams': response_dict['response'][i]['teams'],
+            'goals': response_dict['response'][i]['goals'],
+            'score': response_dict['response'][i]['score'],
+            'events': response_dict['response'][i]['events']
+        }
+        world_matches.append(match_data)
+    return jsonify(world_matches)
 
 if __name__ == '__main__':
     app.run(debug=True)

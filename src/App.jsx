@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Header from './Components/Header/Header';
-import Fixture from './Components/Fixture/Fixture'; // Import Fixture component
-import Error from './Components/Error/Error'; // Import ErrorComponent
-import './App.css'; // Import your CSS for styling
+import Error from './Components/Error/Error';
+import './App.css';
 import FixtureList from './Components/FixtureList/FixtureList';
 
 function App() {
@@ -19,13 +18,12 @@ function App() {
         return response.json();
       })
       .then(data => {
-        // Check if the API response contains an 'errors' key with 'Out of Requests' message
         if (data.errors) {
-          setError(error);
+          setError('Out of Requests');
           setLoading(false);
-          throw new Error('Out of Requests');
+          return; // Exit early
         }
-        setEvents(data.events); // Assuming 'events' is the key in your JSON response for match events
+        setEvents(data); // Assuming 'events' is the key in your JSON response for match events
         setLoading(false);
       })
       .catch(error => {
@@ -35,9 +33,16 @@ function App() {
   }, []);
 
   if (loading) {
-    return <div className="App"><Header /><p>Loading...</p></div>;
+    return (
+      <div className="App">
+        <Header />
+        <div className="content">
+          <p>Loading...</p>
+        </div>
+      </div>
+    );
   }
-
+  console.log(events)
   return (
     <div className="App">
       <Header />
@@ -45,7 +50,7 @@ function App() {
         {error ? (
           <Error message={`Error: ${error}`} />
         ) : (
-          <FixtureList events={events} />
+          <FixtureList matches={events} />
         )}
       </div>
     </div>

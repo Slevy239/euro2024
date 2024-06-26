@@ -1,4 +1,90 @@
-h2, p {
-    color: black;
+.fixture-list {
+    font-family: Arial, sans-serif;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
 }
 
+.match {
+    border: 1px solid #ccc;
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #f9f9f9;
+}
+
+.match-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.league-info {
+    display: flex;
+    align-items: center;
+}
+
+.league-logo {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+}
+
+.league-flag {
+    width: 30px;
+    height: 20px;
+    margin-left: 10px;
+}
+
+.league-details {
+    margin-left: 10px;
+}
+
+.score {
+    font-size: 1.2rem;
+}
+
+.teams {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.team {
+    width: 48%;
+    border: 1px solid #ccc;
+    padding: 10px;
+    background-color: #fff;
+}
+
+.team-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.team-logo {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+}
+
+.events {
+    margin-top: 10px;
+}
+
+.events h3 {
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+}
+
+.events p {
+    margin: 5px 0;
+}
+
+h2,
+h3,
+p,
+.score {
+    color: black;
+}
